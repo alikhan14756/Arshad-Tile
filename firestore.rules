@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Check if user is authenticated and has admin claim role
+    function isAdmin() {
+      return request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    // Products & Categories: public read, admin write
+    match /products/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /categories/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Projects (Portfolio): public read, admin write
+    match /projects/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Reviews: public read & create, admin update & delete
+    match /reviews/{document} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Inquiries (Quotes): public create, admin read/manage
+    match /inquiries/{document} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // CRM Customers: admin only
+    match /customers/{document} {
+      allow read, write: if isAdmin();
+    }
+
+    // Inventory: admin only
+    match /inventory/{document} {
+      allow read, write: if isAdmin();
+    }
+
+    // Suppliers: admin only
+    match /suppliers/{document} {
+      allow read, write: if isAdmin();
+    }
+
+    // Analytics: admin only
+    match /analytics/{document} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

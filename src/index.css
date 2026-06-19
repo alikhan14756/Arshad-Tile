@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+/* Brand color theme for Arshad Tiles & Sanitary */
+:root {
+  --primary: #2c3e50;
+  --primary-light: #34495e;
+  --primary-dark: #1a252f;
+  --accent: #f1c40f;
+  --accent-dark: #f39c12;
+  --accent-light: #f7dc6f;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  min-width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8fafc;
+  color: var(--primary);
+  overflow-x: hidden;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Slab', serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Glass nav */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* Hide scrollbar but keep scroll */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Line clamp */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Brand color utility classes */
+.bg-primary { background-color: var(--primary) !important; }
+.bg-primary-light { background-color: var(--primary-light) !important; }
+.bg-primary-dark { background-color: var(--primary-dark) !important; }
+.bg-accent { background-color: var(--accent) !important; }
+.bg-accent-dark { background-color: var(--accent-dark) !important; }
+.bg-accent-light { background-color: var(--accent-light) !important; }
+
+.text-primary { color: var(--primary) !important; }
+.text-primary-light { color: var(--primary-light) !important; }
+.text-accent { color: var(--accent) !important; }
+.text-accent-dark { color: var(--accent-dark) !important; }
+.text-accent-light { color: var(--accent-light) !important; }
+
+.border-primary { border-color: var(--primary) !important; }
+.border-accent { border-color: var(--accent) !important; }
+.border-accent-dark { border-color: var(--accent-dark) !important; }
+
+.fill-accent-dark { fill: var(--accent-dark) !important; }
+.fill-accent { fill: var(--accent) !important; }
+
+.shadow-accent { box-shadow: 0 4px 20px rgba(241,196,15,0.3); }
+.shadow-primary { box-shadow: 0 4px 20px rgba(44,62,80,0.2); }
+
+/* Hover variants */
+.hover\:bg-primary-light:hover { background-color: var(--primary-light) !important; }
+.hover\:bg-accent-dark:hover { background-color: var(--accent-dark) !important; }
+.hover\:text-accent:hover { color: var(--accent) !important; }
+.hover\:text-primary:hover { color: var(--primary) !important; }
+.hover\:border-accent:hover { border-color: var(--accent) !important; }
+.hover\:bg-accent:hover { background-color: var(--accent) !important; }
+.hover\:text-white:hover { color: #ffffff !important; }
+
+/* accent/opacity helpers */
+.bg-accent\/10 { background-color: rgba(241,196,15,0.10); }
+.bg-accent\/15 { background-color: rgba(241,196,15,0.15); }
+.bg-accent\/20 { background-color: rgba(241,196,15,0.20); }
+.bg-primary\/10 { background-color: rgba(44,62,80,0.10); }
+.bg-primary\/30 { background-color: rgba(44,62,80,0.30); }
+.bg-primary\/95 { background-color: rgba(44,62,80,0.95); }
+.shadow-accent\/15 { box-shadow: 0 4px 16px rgba(241,196,15,0.15); }
+.shadow-accent\/20 { box-shadow: 0 4px 20px rgba(241,196,15,0.20); }
+.shadow-accent\/25 { box-shadow: 0 4px 25px rgba(241,196,15,0.25); }
+.shadow-primary\/10 { box-shadow: 0 4px 16px rgba(44,62,80,0.10); }
+.shadow-primary\/20 { box-shadow: 0 4px 20px rgba(44,62,80,0.20); }
+
+/* Active accent ring */
+.ring-accent { --tw-ring-color: var(--accent); }
+.focus\:border-accent:focus { border-color: var(--accent) !important; }
+.focus\:ring-accent\/50:focus { --tw-ring-color: rgba(241,196,15,0.5); }
+
+/* Gradient helpers for hero */
+.from-primary { --tw-gradient-from: var(--primary); }
+.via-primary\/95 { --tw-gradient-via: rgba(44,62,80,0.95); }
+
+/* Drawer link forced overrides */
+.drawer-link {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.drawer-link:hover {
+  color: var(--accent) !important;
+}
+
