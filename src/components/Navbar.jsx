@@ -9,6 +9,8 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
   const location = useLocation();
 
+  const isHome = location.pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll);
@@ -20,18 +22,26 @@ export default function Navbar() {
     };
   }, []);
 
+  // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
   const isActive = (path) => location.pathname === path;
 
+  // Navbar Background Logic
+  const navBg = isHome 
+    ? (scrolled ? 'bg-white shadow-lg' : 'bg-transparent') 
+    : 'bg-white shadow-md';
+
+  // Text Color Logic
+  const textColor = isHome && !scrolled ? 'text-white' : 'text-primary';
+  const subTextColor = isHome && !scrolled ? 'text-gray-300' : 'text-gray-500';
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className={`fixed top-0 left-0 right-0 z-[100] h-16 transition-all duration-300 ${navBg}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex items-center justify-between h-full">
           
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
@@ -41,14 +51,10 @@ export default function Navbar() {
               </svg>
             </div>
             <div className="flex flex-col">
-              <span className={`font-serif text-xl font-bold leading-tight transition-colors ${
-                scrolled ? 'text-primary' : 'text-white'
-              }`}>
+              <span className={`font-serif text-xl font-bold leading-tight transition-colors ${textColor}`}>
                 Arshad Tiles
               </span>
-              <span className={`text-[10px] font-semibold tracking-wider uppercase transition-colors ${
-                scrolled ? 'text-gray-500' : 'text-gray-400'
-              }`}>
+              <span className={`text-[10px] font-semibold tracking-wider uppercase transition-colors ${subTextColor}`}>
                 & Sanitary
               </span>
             </div>
@@ -70,7 +76,7 @@ export default function Navbar() {
                   className={`text-sm font-medium transition-all duration-200 relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-accent after:transition-all after:duration-200 ${
                     isActive(link.path)
                       ? 'text-accent after:w-full'
-                      : `${scrolled ? 'text-primary' : 'text-white'} hover:text-accent after:w-0 hover:after:w-full`
+                      : `${textColor} hover:text-accent after:w-0 hover:after:w-full`
                   }`}
                 >
                   {link.name}
@@ -81,9 +87,7 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <a 
                 href="tel:+923411239009" 
-                className={`flex items-center gap-2 text-sm font-semibold transition-colors hover:text-accent ${
-                  scrolled ? 'text-primary' : 'text-white'
-                }`}
+                className={`flex items-center gap-2 text-sm font-semibold transition-colors hover:text-accent ${textColor}`}
               >
                 <Phone className="w-4 h-4" />
                 +92 341 1239009
@@ -101,9 +105,9 @@ export default function Navbar() {
                 <Link 
                   to="/admin/login" 
                   className={`text-xs font-semibold px-3 py-1.5 border border-dashed rounded-lg transition-all ${
-                    scrolled 
-                      ? 'border-accent text-accent hover:bg-accent hover:text-primary' 
-                      : 'border-white text-white hover:bg-white/20'
+                    isHome && !scrolled
+                      ? 'border-white text-white hover:bg-white/20' 
+                      : 'border-accent text-accent hover:bg-accent hover:text-primary'
                   }`}
                 >
                   Admin Login
@@ -116,9 +120,9 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`md:hidden p-2 rounded-lg transition-all ${
-              scrolled 
-                ? 'bg-white text-gray-900 border border-gray-200' 
-                : 'text-white hover:bg-white/10'
+              isHome && !scrolled 
+                ? 'text-white hover:bg-white/10' 
+                : 'text-gray-900 bg-white border border-gray-200 hover:bg-gray-100'
             }`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -127,7 +131,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden fixed inset-y-0 right-0 w-[280px] max-w-[90vw] bg-white shadow-2xl p-6 transition-transform duration-300 z-[60] ${
+      <div className={`md:hidden fixed inset-y-0 right-0 w-[280px] max-w-[90vw] bg-white shadow-2xl p-6 transition-transform duration-300 z-[110] ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <button
